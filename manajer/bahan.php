@@ -274,6 +274,9 @@ include "header.php";
 				<br />
 					<div class="box-header with-border">
 					  <h2 class="box-title">Data Bahan</h2>
+						<div class="pull-right">
+						<a href="cetakbahan.php?id_proyek=<?=$_GET['id_proyek'] ?>" class="btn btn-info btn-fill btn-sm">Cetak<i class="fa fa-print"></i></a>
+					</div>
 					</div>
 				
 					<!-- /.box-header -->

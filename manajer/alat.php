@@ -268,13 +268,15 @@ include "header.php";
                   <!-- /.post -->
               </div>
               <!-- /.tab-pane -->
-			  
 			   <div class="active tab-pane" id="lihat_kegiatan">
                 <!-- Post -->
                 <div class="post">
 				<br />
 					<div class="box-header with-border">
 					  <h2 class="box-title">Data Alat</h2>
+						<div class="pull-right">
+						<a href="cetakalat.php?id_proyek=<?=$_GET['id_proyek'] ?>" class="btn btn-info btn-fill btn-sm">Cetak<i class="fa fa-print"></i></a>
+					</div>
 					</div>
 				
 					<!-- /.box-header -->

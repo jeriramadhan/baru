@@ -69,7 +69,7 @@ $q=mysql_fetch_array($sql);
         </span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
-          <font size="5px" color="#FFFFFF" face="berlin Sans FB" style="font-variant:small-caps;font-weight:800">CPM Maju
+          <font size="5px" color="#FFFFFF" face="berlin Sans FB" style="font-variant:small-caps;font-weight:600">CPM Analysis
           </font>
         </span>
       </a>
@@ -301,21 +301,8 @@ $q=mysql_fetch_array($sql);
 
           <li><a href="progres.php?id_proyek=<?php echo $id_proyek?>"><i class="fa fa-check-square-o"></i>Data Progres</a></li>
           <li><a href="progres_pelaksana.php?id_proyek=<?php echo $id_proyek?>"><i class="fa fa-check-square-o"></i>Data Progres Pelaksana</a></li>
-
-          <!-- <li class="treeview">
-            <a href="#" style="border-radius:40px">
-              <i class="fa fa-bar-chart-o"></i> <span>Progress Proyek</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right "></i>
-              </span>
-            </a>
-            <ul class="treeview-menu" style="border-radius:40px">
-              <li><a href="evaluasi.php?id_proyek=<?php echo $id_proyek?>"><i class="fa fa-area-chart"></i> <span>Data Evaluasi</span></a></li>
-              <li><a href="progres.php?id_proyek=<?php echo $id_proyek?>"><i class="fa fa-check-square-o"></i>Data Progres</a></li>
-              <li><a href="progres_pelaksana.php?id_proyek=<?php echo $id_proyek?>"><i class="fa fa-check-square-o"></i>Data Progres Pelaksana</a></li>
-            </ul>
-          </li> -->
-
+          <!-- <li><a href="evaluasi.php?id_proyek=<?php echo $id_proyek?>"><i class="fa fa-area-chart"></i> <span>Data Summary</span></a></li> -->
+          
 
 
 

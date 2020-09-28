@@ -251,7 +251,11 @@ include "header.php";
 				  <br />
 				     <div class="box-header with-border">
 						<h3 class="box-title">Data Tenaga</h3>
+						<div class="pull-right">
+<a href="cetaktenaga.php?id_proyek=<?=$_GET['id_proyek'] ?>" class="btn btn-info btn-fill btn-sm">Cetak<i class="fa fa-print"></i></a>
+</div>
 					 </div>
+
 					<!-- /.box-header -->
 					  <div class="box-body">
 						  <table id="tabel1" class="table table-bordered table-striped">

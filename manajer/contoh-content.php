@@ -2,52 +2,57 @@
 include "fungsi_romawi.php"; 
 ?>
 <div class="content-wrapper">
-    <section class="content">
-      <div class="row">
-      	 <div class="box-body">
-			<br />
-		  
-		  <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#info_proyek" data-toggle="tab">
+	<section class="content">
+		<div class="row">
+			<div class="box-body">
+				<br />
+
+				<div class="nav-tabs-custom">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#info_proyek" data-toggle="tab">
 								<!-- <i class="fa  fa-building text-green"> </i> -->
-								 Info Proyek</a></li>
-              <!-- <li><a href="#perbandingan" data-toggle="tab">
+								Info Proyek</a></li>
+						<!-- <li><a href="#perbandingan" data-toggle="tab">
 								<i class="fa  fa-warning text-red">
 									 </i> Perkiraan Biaya dan Waktu Proyek</a></a></li>
 			  <li><a href="#perbandingan_percepatan" data-toggle="tab">
 					<i class="fa fa-check-circle-o text-yellow"> </i>
 					 Hasil Percepatan Proyek</a></a></li> -->
-            </ul>
-			
-			<div class="tab-content">
-              <div class="tab-pane" id="perbandingan"><!-- Post -->
-                 <div class="post">
-				     <br />
-					  <div class="box-body">
-					    <br />
-						  <table id="tabel1" class="table table-bordered table-striped">
-								 <thead>
-									<tr>
-									  <th rowspan="2">No</th>
-									  <th rowspan="2">Nama Proyek</th>
-									  <th colspan="2"><center>Tanggal</center></th>
-									  <th rowspan="2">Nilai Kontrak</th>
-									  <th rowspan="2">Pemilik Proyek</th>
-									  <th rowspan="2">Status Proyek</th>
-									  <th colspan="4"><center>Perkiraan</center></th>
-									</tr>
-									<tr>
-									  <th>Mulai</th>
-									  <th>Selesai</th>
-									  <th>Biaya Penyelesaian</th>
-									  <th>Tanggal Penyelesaiaan</th>
-									  <th>Denda</th>
-									  <th>Biaya Total</th>
-									</tr>
-									</thead>
-								  <tbody>
-								  <?php
+					</ul>
+
+					<div class="tab-content">
+						<div class="tab-pane" id="perbandingan">
+							<!-- Post -->
+							<div class="post">
+								<br />
+								<div class="box-body">
+									<br />
+									<table id="tabel1" class="table table-bordered table-striped">
+										<thead>
+											<tr>
+												<th rowspan="2">No</th>
+												<th rowspan="2">Nama Proyek</th>
+												<th colspan="2">
+													<center>Tanggal</center>
+												</th>
+												<th rowspan="2">Nilai Kontrak</th>
+												<th rowspan="2">Pemilik Proyek</th>
+												<th rowspan="2">Status Proyek</th>
+												<th colspan="4">
+													<center>Perkiraan</center>
+												</th>
+											</tr>
+											<tr>
+												<th>Mulai</th>
+												<th>Selesai</th>
+												<th>Biaya Penyelesaian</th>
+												<th>Tanggal Penyelesaiaan</th>
+												<th>Denda</th>
+												<th>Biaya Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
 									$proyek = mysql_query("SELECT * FROM proyek");
 									$no=0;
 									while($r=mysql_fetch_array($proyek)){
@@ -64,8 +69,8 @@ include "fungsi_romawi.php";
 										  <td>$r[pemilik]</td>
 										 ";
 									 ?>
-										  <td>
-											 <?php
+											<td>
+												<?php
 												$id_proyek = $r['id_proyek'];
 												$sub4 = "select sum(bobot_aktual) bobot from progres where id_proyek = '$id_proyek'";
 												$res4= mysql_query($sub4);
@@ -82,8 +87,8 @@ include "fungsi_romawi.php";
 													  }
 													}
 												?>
-										  </td>
-											  <?php
+											</td>
+											<?php
 												$query = mysql_query("select * from evaluasi join progres on evaluasi.id_progres = progres.id_progres 
 																	  where progres.id_proyek = '$id_proyek' order by minggu DESC limit 1");
 												$evaluasi= mysql_fetch_array($query);
@@ -115,41 +120,57 @@ include "fungsi_romawi.php";
 													$total_biaya = $np + $totaldenda;	
 												}	
 											?>
-										  <td><?php echo"<code> Rp.".number_format($total,0,',','.')."</code>"?></td>
-										  <td><?php echo"<code> ".date('d/m/Y',strtotime($tgl_selesai))."</code>"?></td>
-										  <td><?php echo"<code> Rp.".number_format($totaldenda,0,',','.')."</code>"?></td>
-										  <td><?php echo"<code> Rp.".number_format($total_biaya,0,',','.')."</code>"?></td>
-										</tr>
-									  <?php 
+											<td><?php echo"<code> Rp.".number_format($total,0,',','.')."</code>"?></td>
+											<td><?php echo"<code> ".date('d/m/Y',strtotime($tgl_selesai))."</code>"?></td>
+											<td><?php echo"<code> Rp.".number_format($totaldenda,0,',','.')."</code>"?></td>
+											<td><?php echo"<code> Rp.".number_format($total_biaya,0,',','.')."</code>"?></td>
+											</tr>
+											<?php 
 									}
 								  ?>
-							    </tbody>
-						    </table>
-					  </div>               
-				 </div><!-- /.post -->
-              </div><!-- /.tab-pane -->
-			  
-              <div class="tab-pane" id="perbandingan_percepatan">
-                <!-- Post -->
-                <div class="post">
-					 <br />
-					  <div class="box-body">
-					    <br />
-						  <table id="tabel2" class="table table-bordered table-striped">
-								 <thead>
-									<tr>
-									  <th><center>No</center></th>
-									  <th><center>Proyek</center></th>
-									  <th><center>Durasi (Hari)</center></th>
-									  <th><center>Nilai Proyek (Rp.)</center></th>
-									  <th><center>Biaya Percepatan</center></th>
-									  <th><center>Terlambat (Hari)</center></th>
-									  <th><center>Denda (Rp.)</center></th>
-									  <th><center>Biaya Total (Rp.)</center></th>
-									</tr>
-									</thead>
-								  <tbody>
-								  <?php
+										</tbody>
+									</table>
+								</div>
+							</div><!-- /.post -->
+						</div><!-- /.tab-pane -->
+
+						<div class="tab-pane" id="perbandingan_percepatan">
+							<!-- Post -->
+							<div class="post">
+								<br />
+								<div class="box-body">
+									<br />
+									<table id="tabel2" class="table table-bordered table-striped">
+										<thead>
+											<tr>
+												<th>
+													<center>No</center>
+												</th>
+												<th>
+													<center>Proyek</center>
+												</th>
+												<th>
+													<center>Durasi (Hari)</center>
+												</th>
+												<th>
+													<center>Nilai Proyek (Rp.)</center>
+												</th>
+												<th>
+													<center>Biaya Percepatan</center>
+												</th>
+												<th>
+													<center>Terlambat (Hari)</center>
+												</th>
+												<th>
+													<center>Denda (Rp.)</center>
+												</th>
+												<th>
+													<center>Biaya Total (Rp.)</center>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
 									$proyek = mysql_query("SELECT * FROM proyek WHERE id_proyek IN (SELECT id_proyek FROM percepatan)");
 									$no=0;
 									while($r=mysql_fetch_array($proyek)){
@@ -213,64 +234,67 @@ include "fungsi_romawi.php";
 													$terlambat = 0;	
 												}	
 										 ?>
-										  <td><?php echo"<code>  Rp.".number_format($biaya_percepatan,0,',','.')."</code>"?></td>
-										  <td><?php echo $terlambat ?></td>
-										  <td><?php echo"<code>  Rp.".number_format($totaldenda,0,',','.')."</code>"?></td>
-										  <td><?php echo"<code> Rp.".number_format($total_biaya,0,',','.')."</code>"?></td>
-										</tr>
-									  <?php 
+											<td><?php echo"<code>  Rp.".number_format($biaya_percepatan,0,',','.')."</code>"?></td>
+											<td><?php echo $terlambat ?></td>
+											<td><?php echo"<code>  Rp.".number_format($totaldenda,0,',','.')."</code>"?></td>
+											<td><?php echo"<code> Rp.".number_format($total_biaya,0,',','.')."</code>"?></td>
+											</tr>
+											<?php 
 									}
 								  ?>
-							    </tbody>
-						    </table>
-					  </div>    
-				</div><!-- /.post -->
-              </div><!-- /.tab-pane -->
-			  
-			   <div class="active tab-pane" id="info_proyek">
-                <!-- Post -->
-                <div class="post">
-				<br />
-					<div class="box-header with-border">
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-							  <div class="box" style="background-color:#f7f5f6">
-								<div class="box-header">
-								   <form action="?" method="GET">
-									   <div class="input-group input-group-sm">
-										  <select name="id_proyek" class="form-control select2" style="width: 100%;">
-											<option selected="selected">--Pilih Proyek--</option>
-											 <?php
+										</tbody>
+									</table>
+								</div>
+							</div><!-- /.post -->
+						</div><!-- /.tab-pane -->
+
+						<div class="active tab-pane" id="info_proyek">
+							<!-- Post -->
+							<div class="post">
+								<br />
+								<div class="box-header with-border">
+								</div>
+								<!-- /.box-header -->
+								<div class="box-body">
+									<div class="box" style="background-color:#f7f5f6">
+										<div class="box-header">
+											<form action="?" method="GET">
+												<div class="input-group input-group-sm">
+													<select name="id_proyek" class="form-control select2" style="width: 100%;">
+														<option selected="selected">--Pilih Proyek--</option>
+														<?php
 												$query = "SELECT * FROM proyek";
 												$result = mysql_query($query);
 												while($row = mysql_fetch_array($result))
 												{		
 												  ?>
-													  <option <?php if (isset($_GET['id_proyek'])){ if (($row['id_proyek'] == $_GET['id_proyek'])) { echo 'selected'; }} ?> 
-													  value="<?php echo $row['id_proyek']; ?>"><?php echo $row['nama_proyek'];  ?></option>
-												  <?php 
+														<option
+															<?php if (isset($_GET['id_proyek'])){ if (($row['id_proyek'] == $_GET['id_proyek'])) { echo 'selected'; }} ?>
+															value="<?php echo $row['id_proyek']; ?>"><?php echo $row['nama_proyek'];  ?></option>
+														<?php 
 												}
 											  ?>
-										  </select>
-											  <span class="input-group-btn"><button type="submit" class="btn btn-info btn-flat">Pilih</button></span>
+													</select>
+													<span class="input-group-btn"><button type="submit"
+															class="btn btn-info btn-flat">Pilih</button></span>
+												</div>
+											</form>
+
+											<!--isi konten -->
 										</div>
-									</form>
-								  
-							      <!--isi konten -->
-							    </div>
-							   <div class="box-body"><!--isi konten -->
-							   <div class="row">
-								<!-- Left col -->
-																
-								  <div class="col-md-4">
-								  <!-- Info Boxes Style 2 -->
-									<div class="info-box" style="background-color:#fff">
-										<div class="info-box-content" style="margin-left:5px">
-											 <i class="fa  fa-user text-orange"> </i>
-											 <span> Pemilik Proyek</span>
-											  <span class="info-box-number">
-												  <?php
+										<div class="box-body">
+											<!--isi konten -->
+											<div class="row">
+												<!-- Left col -->
+
+												<div class="col-md-4">
+													<!-- Info Boxes Style 2 -->
+													<div class="info-box" style="background-color:#fff">
+														<div class="info-box-content" style="margin-left:5px">
+															<i class="fa  fa-user text-orange"> </i>
+															<span> Pemilik Proyek</span>
+															<span class="info-box-number">
+																<?php
 												   if(isset($_GET['id_proyek'])) 
 												   { 
 													$id_proyek = $_GET['id_proyek'];
@@ -283,17 +307,17 @@ include "fungsi_romawi.php";
 														}
 												   }
 												  ?>
-											  </span>
-											  <div class="progress">
-												<div class="progress-bar" style="width: 100%"></div>
-											  </div>
-											  <span class="progress-description">
-											   
-												 <i class="fa  fa-map-o text-blue"> </i>
-												 <span> Lokasi Proyek</span>
-											   <span class="info-box-number">
-												<code>
-												<?php
+															</span>
+															<div class="progress">
+																<div class="progress-bar" style="width: 100%"></div>
+															</div>
+															<span class="progress-description">
+
+																<i class="fa  fa-map-o text-blue"> </i>
+																<span> Lokasi Proyek</span>
+																<span class="info-box-number">
+																	<code>
+																		<?php
 												   if(isset($_GET['id_proyek'])) 
 												   { 
 													$id_proyek = $_GET['id_proyek'];
@@ -307,19 +331,19 @@ include "fungsi_romawi.php";
 														}
 												   }
 												  ?>
-												 </code>
-											   </span>
-											  </span>
-											  
-											  <div class="progress">
-												<div class="progress-bar" style="width: 100%"></div>
-											  </div>
-											  <span class="progress-description">
-											   
-												 <i class="fa  fa-money"> </i>
-												 <span> Nilai Proyek</span>
-											   <span class="info-box-number">
-												<?php
+																	</code>
+																</span>
+															</span>
+
+															<div class="progress">
+																<div class="progress-bar" style="width: 100%"></div>
+															</div>
+															<span class="progress-description">
+
+																<i class="fa  fa-money"> </i>
+																<span> Nilai Proyek</span>
+																<span class="info-box-number">
+																	<?php
 												   if(isset($_GET['id_proyek'])) 
 												   { 
 													$id_proyek = $_GET['id_proyek'];
@@ -333,19 +357,19 @@ include "fungsi_romawi.php";
 														}
 												   }
 												  ?>
-												  </span>
-											  </span>
-											  
-											  <div class="progress">
-												<div class="progress-bar" style="width: 100%"></div>
-											  </div>
-											  <span class="progress-description">
-											   
-											   <i class="fa  fa-list-alt text-red"> 
+																</span>
+															</span>
 
-												 </i><span> No. SPK</span>
-											   <span class="info-box-number">
-												<?php
+															<div class="progress">
+																<div class="progress-bar" style="width: 100%"></div>
+															</div>
+															<span class="progress-description">
+
+																<i class="fa  fa-list-alt text-red">
+
+																</i><span> No. SPK</span>
+																<span class="info-box-number">
+																	<?php
 												   if(isset($_GET['id_proyek'])) 
 												   { 
 													$id_proyek = $_GET['id_proyek'];
@@ -358,24 +382,24 @@ include "fungsi_romawi.php";
 														}
 												   }
 												  ?>
-												  </span>
-											  </span>
-												
-									   <!-- /.info-box-content -->
-									</div>
-									<!-- /.info-box -->
-								</div>
-								</div>
-									  
-									  
-								   <div class="col-md-3">
-									 <!-- MAP & BOX PANE -->
-									   <div class="info-box" style="background-color:#fff">
-										<div class="info-box-content" style="margin-left:20px">
-										   <i class="fa  fa-calendar text-green">
-												  </i><span> Tanggal Mulai</span>
-											  <span class="info-box-number">
-												  <?php
+																</span>
+															</span>
+
+															<!-- /.info-box-content -->
+														</div>
+														<!-- /.info-box -->
+													</div>
+												</div>
+
+
+												<div class="col-md-3">
+													<!-- MAP & BOX PANE -->
+													<div class="info-box" style="background-color:#fff">
+														<div class="info-box-content" style="margin-left:20px">
+															<i class="fa  fa-calendar text-green">
+															</i><span> Tanggal Mulai</span>
+															<span class="info-box-number">
+																<?php
 												   if(isset($_GET['id_proyek'])) 
 												   { 
 													$id_proyek = $_GET['id_proyek'];
@@ -387,17 +411,17 @@ include "fungsi_romawi.php";
 														}
 												   }
 												  ?>
-											  </span>
-											  <div class="progress">
-												<div class="progress-bar" style="width: 100%"></div>
-											  </div>
-											  <span class="progress-description">
-											   
-											   <i class="fa  fa-calendar text-green"> 
+															</span>
+															<div class="progress">
+																<div class="progress-bar" style="width: 100%"></div>
+															</div>
+															<span class="progress-description">
 
-												 </i><span> Tanggal Selesai</span>
-											   <span class="info-box-number">
-												<?php
+																<i class="fa  fa-calendar text-green">
+
+																</i><span> Tanggal Selesai</span>
+																<span class="info-box-number">
+																	<?php
 												   if(isset($_GET['id_proyek'])) 
 												   { 
 													$id_proyek = $_GET['id_proyek'];
@@ -409,18 +433,18 @@ include "fungsi_romawi.php";
 														}
 												   }
 												  ?>
-												  </span>
-											  </span>
-											  
-											  <div class="progress">
-												<div class="progress-bar" style="width: 100%"></div>
-											  </div>
-											  <span class="progress-description">
-											   
-												 <i class="fa  fa-repeat"> </i>
-												 <span> Durasi Proyek</span>
-											   <span class="info-box-number">
-												<?php
+																</span>
+															</span>
+
+															<div class="progress">
+																<div class="progress-bar" style="width: 100%"></div>
+															</div>
+															<span class="progress-description">
+
+																<i class="fa  fa-repeat"> </i>
+																<span> Durasi Proyek</span>
+																<span class="info-box-number">
+																	<?php
 												   if(isset($_GET['id_proyek'])) 
 												   { 
 													$id_proyek = $_GET['id_proyek'];
@@ -433,18 +457,18 @@ include "fungsi_romawi.php";
 														}
 												   }
 												  ?>
-												  </span>
-											  </span>
-											  
-											  <div class="progress">
-												<div class="progress-bar" style="width: 100%"></div>
-											  </div>
-											  <span class="progress-description">
-											   
-												<i class="fa fa-pencil-square-o text-red"> </i>
-												<span> ID Proyek</span>
-											   <span class="info-box-number">
-												<?php
+																</span>
+															</span>
+
+															<div class="progress">
+																<div class="progress-bar" style="width: 100%"></div>
+															</div>
+															<span class="progress-description">
+
+																<i class="fa fa-pencil-square-o text-red"> </i>
+																<span> ID Proyek</span>
+																<span class="info-box-number">
+																	<?php
 												   if(isset($_GET['id_proyek'])) 
 												   { 
 													$id_proyek = $_GET['id_proyek'];
@@ -457,24 +481,24 @@ include "fungsi_romawi.php";
 														}
 												   }
 												  ?>
-												  
-												 <br />     
-												  &nbsp;
-												  </span>
-											  </span>
-									   </div>
-									</div>
-								</div>
-								
-									 
-								   <div class="col-md-5">
-									 <div class="box box-solid box-default">
-									   <div class="box-body">  
-											 <i class="fa fa-pencil-square-o text-navy"> </i>
-											 <span> Progres Proyek</span>
-										   <br />
-											  <center>
-											   <?php
+
+																	<br />
+																	&nbsp;
+																</span>
+															</span>
+														</div>
+													</div>
+												</div>
+
+
+												<div class="col-md-5">
+													<div class="box box-solid box-default">
+														<div class="box-body">
+															<i class="fa fa-pencil-square-o text-navy"> </i>
+															<span> Progres Proyek</span>
+															<br />
+															<center>
+																<?php
 												   if(isset($_GET['id_proyek'])) 
 												   { 
 													$id_proyek = $_GET['id_proyek'];
@@ -486,9 +510,9 @@ include "fungsi_romawi.php";
 														}
 												   }
 												?>
-											  </center>
-											<div class="progress">
-											  <?php
+															</center>
+															<div class="progress">
+																<?php
 												   if(isset($_GET['id_proyek'])) 
 												   { 
 													$id_proyek = $_GET['id_proyek'];
@@ -497,17 +521,18 @@ include "fungsi_romawi.php";
 														while($r=mysql_fetch_array($kegiatan))
 														{
 														  ?>
-															 <div class="progress">
-															   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" 
-																 aria-valuemax="100" style="width:<?php echo $r['bobot_a']?>%">
-															   </div>
-															</div>
-														 <?php 
+																<div class="progress">
+																	<div class="progress-bar progress-bar-striped progress-bar-animated"
+																		role="progressbar" aria-valuemin="0" aria-valuemax="100"
+																		style="width:<?php echo $r['bobot_a']?>%">
+																	</div>
+																</div>
+																<?php 
 														}
 												   }
 												?>
-											</div>
-											<?php
+															</div>
+															<?php
 											   
 											 if(isset($_GET['id_proyek'])) 
 											 { 
@@ -521,8 +546,8 @@ include "fungsi_romawi.php";
 												 $spi = $evaluasi['spi'];
 												 $periode = $evaluasi['minggu'];
 											  ?>
-												
-												  <?php
+
+															<?php
 														   if($cv>0 AND $cpi>1)
 														   {
 															 $penilaiancv = "Lebih rendah dari anggaran";
@@ -553,7 +578,7 @@ include "fungsi_romawi.php";
 														   }
 														   else{$penilaiansv = " ";}
 													  ?>
-												<?php 
+															<?php 
 												}
 												else
 												{
@@ -562,40 +587,45 @@ include "fungsi_romawi.php";
 												 $penilaiansv = "0";
 												} 
 												?>
-												
-										
-												<?php
+
+
+															<?php
 												   echo "  Pada Minggu Ke- $periode <br>";
 												   echo "  Biaya <code>".$penilaiancv."</code><br>";
 												   echo "  Waktu <code>".$penilaiansv."</code>";
 												?>
-												
-												<div align="left">
-												<br />
-												  <!-- <a href="detail_evm.php?id_proyek=<?=$_GET['id_proyek']?>" class="btn bg-orange btn-sm" style="border-radius:40px" ><span class="fa fa-external-link"></span>  Lihat Selengkapnya</a> -->
+
+															<div align="left">
+																<br />
+																<!-- <a href="detail_evm.php?id_proyek=<?=$_GET['id_proyek']?>" class="btn bg-orange btn-sm" style="border-radius:40px" ><span class="fa fa-external-link"></span>  Lihat Selengkapnya</a> -->
+															</div>
+														</div>
+													</div>
 												</div>
-									   </div>			
-									 </div>
-								   </div>
-					
-									  <!--akhir isi konten -->  
-							  </div>
-						   
-							
-								  <div class="col-md-8">
-									 <!-- MAP & BOX PANE -->
-									  <div class="box box-danger">
-										<!-- /.box-header -->
-										<div class="box-body">
-										<h4><i class="fa  fa-bar-chart-o"></i><span> Data CPM</span></h4>
-										 <div align="right">
-										   <a href="gantt-chart.php?id_proyek=<?=$_GET['id_proyek'];?>" class="btn btn-danger btn-fill btn-sm" style="border-radius:40px"> <i class="fa fa-bar-chart-o "></i><span> Gantt Chart</span></a>
-										
-										   <a href="cpm.php?id_proyek=<?=$_GET['id_proyek']?>" class="btn bg-olive btn-sm" style="border-radius:40px"><span class="fa fa-sitemap"></span>  Diagram Jaringan</a>
-										   <a href="detail.php?id_proyek=<?=$_GET['id_proyek']?>" class="btn bg-navy btn-sm" style="border-radius:40px"><span class="fa fa-external-link-square"></span>  Detail CPM</a>  
-										 </div>
-										
-										<?php 
+
+												<!--akhir isi konten -->
+											</div>
+
+
+											<div class="col-md-8">
+												<!-- MAP & BOX PANE -->
+												<div class="box box-danger">
+													<!-- /.box-header -->
+													<div class="box-body">
+														<h4><i class="fa  fa-bar-chart-o"></i><span> Data CPM</span></h4>
+														<div align="right">
+															<a href="gantt-chart.php?id_proyek=<?=$_GET['id_proyek'];?>"
+																class="btn btn-danger btn-fill btn-sm" style="border-radius:40px"> <i
+																	class="fa fa-bar-chart-o "></i><span> Gantt Chart</span></a>
+
+															<a href="cpm.php?id_proyek=<?=$_GET['id_proyek']?>" class="btn bg-olive btn-sm"
+																style="border-radius:40px"><span class="fa fa-sitemap"></span> Diagram Jaringan</a>
+															<a href="detail.php?id_proyek=<?=$_GET['id_proyek']?>" class="btn bg-navy btn-sm"
+																style="border-radius:40px"><span class="fa fa-external-link-square"></span> Detail
+																CPM</a>
+														</div>
+
+														<?php 
 											$link=koneksidb();
 											if(isset($_GET['id_proyek'])) 
 											{ 
@@ -610,220 +640,230 @@ include "fungsi_romawi.php";
 																	   WHERE evaluasi.id_proyek = '$id_proyek' ORDER BY minggu ASC");
 											}
 										?>
-										<!-- <div id="echart_line" style="height:400%; width:auto; margin:0 auto; max-width:100%"></div>
-										<script>
-										  var theme = {
-											  color: [
-												  '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
-												  '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
-											  ],
-									
-											  title: {
-												  itemGap: 8,
-												  textStyle: {
-													  fontWeight: 'normal',
-													  color: '#408829'
-												  }
-											  },
-									
-											  dataRange: {
-												  color: ['#1f610a', '#97b58d']
-											  },
-									
-											  toolbox: {
-												  color: ['#408829', '#408829', '#408829', '#408829']
-											  },
-									
-											  tooltip: {
-												  backgroundColor: 'rgba(0,0,0,0.5)',
-												  axisPointer: {
-													  type: 'line',
-													  lineStyle: {
-														  color: '#408829',
-														  type: 'dashed'
-													  },
-													  crossStyle: {
-														  color: '#408829'
-													  },
-													  shadowStyle: {
-														  color: 'rgba(200,200,200,0.3)'
-													  }
-												  }
-											  },
-									
-											  dataZoom: {
-												  dataBackgroundColor: '#eee',
-												  fillerColor: 'rgba(64,136,41,0.2)',
-												  handleColor: '#408829'
-											  },
-											  grid: {
-												  borderWidth: 0
-											  },
-									
-											  categoryAxis: {
-												  axisLine: {
-													  lineStyle: {
-														  color: '#408829'
-													  }
-												  },
-												  splitLine: {
-													  lineStyle: {
-														  color: ['#eee']
-													  }
-												  }
-											  },
-									
-											  valueAxis: {
-												  axisLine: {
-													  lineStyle: {
-														  color: '#408829'
-													  }
-												  },
-												  splitArea: {
-													  show: true,
-													  areaStyle: {
-														  color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
-													  }
-												  },
-												  splitLine: {
-													  lineStyle: {
-														  color: ['#eee']
-													  }
-												  }
-											  },
-											  timeline: {
-												  lineStyle: {
-													  color: '#408829'
-												  },
-												  controlStyle: {
-													  normal: {color: '#408829'},
-													  emphasis: {color: '#408829'}
-												  }
-											  },
-									
-											  k: {
-												  itemStyle: {
-													  normal: {
-														  color: '#68a54a',
-														  color0: '#a9cba2',
-														  lineStyle: {
-															  width: 1,
-															  color: '#408829',
-															  color0: '#86b379'
-														  }
-													  }
-												  }
-											  },
-											  textStyle: {
-												  fontFamily: 'Arial, Verdana, sans-serif'
-											  }
-										  };
-										  
-										  var echartLine = echarts.init(document.getElementById('echart_line'), theme);
-									
-										  echartLine.setOption({
-											title: {
-											
-											  subtext: 'Total Pengeluaran'
-											},
-											tooltip: {
-											  trigger: 'axis'
-											},
-											legend: {
-											  x: 220,
-											  y: 40,
-											  data: ['Biaya Rencana (PV) (Rp.)', 'Earned Value (EV) (Rp.)','Biaya Aktual (AC) (Rp.)']
-											},toolbox: {
-											  show: true
-											},
-											calculable: true,
-											xAxis: [{
-											  type: 'category',
-											  boundaryGap: false,
-											  data: [
-											  <?php 
-													while ($rencana = mysql_fetch_array($query)) {
-														echo '"Minggu ke-'.$rencana['minggu'].'",';   
-													}
-												?>
-											  ]
-											}],
-											yAxis: [{
-											  type: 'value'
-											}],
-											series: [{
-											  name: 'Biaya Rencana (PV) (Rp.)',
-											  type: 'line',
-											  smooth: true,
-											  itemStyle: {
-												normal: {
-												  areaStyle: {
-													type: 'default'
-												  }
-												}
-											  },
-											  data: [
-											  <?php 
-													while ($rencana2 = mysql_fetch_array($query2)) {
-															$pv = round($rencana2['pv_komulatif'],-2);
-															echo $pv.',';            
-												} ?>
-											  ]
-											}, {
-											  name: 'Earned Value (EV) (Rp.)',
-											  type: 'line',
-											  smooth: true,
-											  itemStyle: {
-												normal: {
-												  areaStyle: {
-													type: 'default'
-												  }
-												}
-											  },
-											  data: [
-											  <?php 
-													while ($rencana3 = mysql_fetch_array($query3)) {
-														$ev = round($rencana3['ev_komulatif'],-2);
-														echo $ev.',';            
-													}
-												?>
-											  ]
-											}, {
-											  name: 'Biaya Aktual (AC) (Rp.)',
-											  type: 'line',
-											  smooth: true,
-											  itemStyle: {
-												normal: {
-												  areaStyle: {
-													type: 'default'
-												  }
-												}
-											  },
-											  data: [
-											  <?php 
-												   while ($rencana4 = mysql_fetch_array($query4)) {
-														$ac = round($rencana4['ac_komulatif'],-2);
-														echo $ac.',';            
-													}
-												?>
-											  ]
-											}]
-										  });
-										</script> -->
-										
-										 <div class="col-md-12">
-											  <div class="box collapsed-box">
-												<div class="box-header with-border">
-												  <h4>Keterangan:</h4>
-												  <div class="box-tools pull-right">
-													<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-													</button>
-												  </div>
-												  <!-- /.box-tools -->
-												</div>
-												<!-- /.box-header -->
-												<div class="box-body" style="display: none;">
-													 <?php 
+														<div id="echart_line" style="height:400%; width:auto; margin:0 auto; max-width:100%"></div>
+														<script>
+															var theme = {
+																color: [
+																	'#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+																	'#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+																],
+
+																title: {
+																	itemGap: 8,
+																	textStyle: {
+																		fontWeight: 'normal',
+																		color: '#408829'
+																	}
+																},
+
+																dataRange: {
+																	color: ['#1f610a', '#97b58d']
+																},
+
+																toolbox: {
+																	color: ['#408829', '#408829', '#408829', '#408829']
+																},
+
+																tooltip: {
+																	backgroundColor: 'rgba(0,0,0,0.5)',
+																	axisPointer: {
+																		type: 'line',
+																		lineStyle: {
+																			color: '#408829',
+																			type: 'dashed'
+																		},
+																		crossStyle: {
+																			color: '#408829'
+																		},
+																		shadowStyle: {
+																			color: 'rgba(200,200,200,0.3)'
+																		}
+																	}
+																},
+
+																dataZoom: {
+																	dataBackgroundColor: '#eee',
+																	fillerColor: 'rgba(64,136,41,0.2)',
+																	handleColor: '#408829'
+																},
+																grid: {
+																	borderWidth: 0
+																},
+
+																categoryAxis: {
+																	axisLine: {
+																		lineStyle: {
+																			color: '#408829'
+																		}
+																	},
+																	splitLine: {
+																		lineStyle: {
+																			color: ['#eee']
+																		}
+																	}
+																},
+
+																valueAxis: {
+																	axisLine: {
+																		lineStyle: {
+																			color: '#408829'
+																		}
+																	},
+																	splitArea: {
+																		show: true,
+																		areaStyle: {
+																			color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+																		}
+																	},
+																	splitLine: {
+																		lineStyle: {
+																			color: ['#eee']
+																		}
+																	}
+																},
+																timeline: {
+																	lineStyle: {
+																		color: '#408829'
+																	},
+																	controlStyle: {
+																		normal: {
+																			color: '#408829'
+																		},
+																		emphasis: {
+																			color: '#408829'
+																		}
+																	}
+																},
+
+																k: {
+																	itemStyle: {
+																		normal: {
+																			color: '#68a54a',
+																			color0: '#a9cba2',
+																			lineStyle: {
+																				width: 1,
+																				color: '#408829',
+																				color0: '#86b379'
+																			}
+																		}
+																	}
+																},
+																textStyle: {
+																	fontFamily: 'Arial, Verdana, sans-serif'
+																}
+															};
+
+															var echartLine = echarts.init(document.getElementById('echart_line'), theme);
+
+															echartLine.setOption({
+																title: {
+
+																	subtext: 'Total Pengeluaran'
+																},
+																tooltip: {
+																	trigger: 'axis'
+																},
+																legend: {
+																	x: 220,
+																	y: 40,
+																	data: ['Biaya Rencana  (Rp.)', 'Nilai Dibayar (Rp.)', 'Biaya Aktual (Rp.)']
+																},
+																toolbox: {
+																	show: true
+																},
+																calculable: true,
+																xAxis: [{
+																	type: 'category',
+																	boundaryGap: false,
+																	data: [ <
+																		? php
+																		while ($rencana = mysql_fetch_array($query)) {
+																			echo '"Minggu ke-'.$rencana['minggu'].
+																			'",';
+																		} ?
+																		>
+																	]
+																}],
+																yAxis: [{
+																	type: 'value'
+																}],
+																series: [{
+																	name: 'Biaya Rencana (PV) (Rp.)',
+																	type: 'line',
+																	smooth: true,
+																	itemStyle: {
+																		normal: {
+																			areaStyle: {
+																				type: 'default'
+																			}
+																		}
+																	},
+																	data: [ <
+																		? php
+																		while ($rencana2 = mysql_fetch_array($query2)) {
+																			$pv = round($rencana2['pv_komulatif'], -2);
+																			echo $pv.
+																			',';
+																		} ? >
+																	]
+																}, {
+																	name: 'Earned Value (EV) (Rp.)',
+																	type: 'line',
+																	smooth: true,
+																	itemStyle: {
+																		normal: {
+																			areaStyle: {
+																				type: 'default'
+																			}
+																		}
+																	},
+																	data: [ <
+																		? php
+																		while ($rencana3 = mysql_fetch_array($query3)) {
+																			$ev = round($rencana3['ev_komulatif'], -2);
+																			echo $ev.
+																			',';
+																		} ?
+																		>
+																	]
+																}, {
+																	name: 'Biaya Aktual (AC) (Rp.)',
+																	type: 'line',
+																	smooth: true,
+																	itemStyle: {
+																		normal: {
+																			areaStyle: {
+																				type: 'default'
+																			}
+																		}
+																	},
+																	data: [ <
+																		? php
+																		while ($rencana4 = mysql_fetch_array($query4)) {
+																			$ac = round($rencana4['ac_komulatif'], -2);
+																			echo $ac.
+																			',';
+																		} ?
+																		>
+																	]
+																}]
+															});
+														</script>
+
+														<div class="col-md-12">
+															<div class="box collapsed-box">
+																<div class="box-header with-border">
+																	<h4>Keterangan:</h4>
+																	<div class="box-tools pull-right">
+																		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+																				class="fa fa-plus"></i>
+																		</button>
+																	</div>
+																	<!-- /.box-tools -->
+																</div>
+																<!-- /.box-header -->
+																<div class="box-body" style="display: none;">
+																	<?php 
 														if(isset($_GET['id_proyek'])) 
 														{ 
 														  $id = $_GET['id_proyek'];
@@ -863,48 +903,49 @@ include "fungsi_romawi.php";
 															  }
 															  else if ($spi<1)
 															  {
-																 $penilaiansv = "kinerja proyek buruk";
+																 $penilaiansv = "kinerja proyek belum maksimal";
 															  }
 															   else{$penilaiansv = " ";}
 													   ?>
-															
-															<i class="fa  fa-circle-o"><b><?php echo "  Pada Minggu Ke- $row_nilai[minggu]"?></b></i>
-															<?php 
+
+																	<i
+																		class="fa  fa-circle-o"><b><?php echo "  Pada Minggu Ke- $row_nilai[minggu]"?></b></i>
+																	<?php 
 															 if ($spi < 1)
 															  {
-															 ?> 
-																<code><?php echo $nilai_keterangan ?><?php echo $penilaiansv ?><br></code>
-															 <?php 
+															 ?>
+																	<code><?php echo $nilai_keterangan ?><?php echo $penilaiansv ?><br></code>
+																	<?php 
 															 }
 															 else
 															 {
 															 ?>
-																<?php echo $nilai_keterangan ?><?php echo $penilaiansv ?><br>
-															 
-															 <?php
+																	<?php echo $nilai_keterangan ?><?php echo $penilaiansv ?><br>
+
+																	<?php
 															  }
-															 ?>  
-															
-													   <?php
+															 ?>
+
+																	<?php
 														}
 													   }
 													 ?>
-												</div><!-- /.box-body -->
-											 </div><!-- /.box -->
-										   </div>
-										</div>
-									</div>
-								 </div>
-								 
-								 <div class="col-md-4">
-									 <!-- MAP & BOX PANE -->
-									  <div class="box box-primary" style="background-color:#ffff">
-										<!-- /.box-header -->
-										   <div class="box-header">
-											   <i class="fa fa-pencil-square-o"></i> Keterangan
-										   </div>
-										<div class="box-body">
-										<?php
+																</div><!-- /.box-body -->
+															</div><!-- /.box -->
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-4">
+												<!-- MAP & BOX PANE -->
+												<div class="box box-primary" style="background-color:#ffff">
+													<!-- /.box-header -->
+													<div class="box-header">
+														<i class="fa fa-pencil-square-o"></i> Keterangan
+													</div>
+													<div class="box-body">
+														<?php
 										if(isset($_GET['id_proyek'])) 
 										{ 
 										   $id_proyek = $_GET['id_proyek'];
@@ -917,26 +958,30 @@ include "fungsi_romawi.php";
 										   $cpm = " ";
 										}
 										?>
-										
-									  <div class="col-lg-12">
-										 <!-- small box -->
-											  <div class="small-box" style="background-color:#339999">
-												<div class="inner">
-												  <p>Jumlah Durasi Jalur Kritis</p>
-												  <p><h3><?php echo "$cpm" ?> Jam</h3></p>
-												</div>
-												<div class="icon">
-												  <i class="ion ion-stats-bars"></i>
-												</div>
-											 </div>
-									  </div>
-										
-										<div class="col-lg-12">
-										   <!-- small box -->
-											  <div class="small-box " style="background-color:#CC9999">
-												<div class="inner">
-												  <p><h4>Pekerjaan Kritis</h4></p>
-												  <?php
+
+														<div class="col-lg-12">
+															<!-- small box -->
+															<div class="small-box" style="background-color:#339999">
+																<div class="inner">
+																	<p>Jumlah Durasi Jalur Kritis</p>
+																	<p>
+																		<h3><?php echo "$cpm" ?> Jam</h3>
+																	</p>
+																</div>
+																<div class="icon">
+																	<i class="ion ion-stats-bars"></i>
+																</div>
+															</div>
+														</div>
+
+														<div class="col-lg-12">
+															<!-- small box -->
+															<div class="small-box " style="background-color:#CC9999">
+																<div class="inner">
+																	<p>
+																		<h4>Pekerjaan Kritis</h4>
+																	</p>
+																	<?php
 														if(isset($_GET['id_proyek'])) 
 														{ 
 														   $id_proyek = $_GET['id_proyek'];
@@ -949,25 +994,27 @@ include "fungsi_romawi.php";
 														  while($nama = mysql_fetch_array($cek2))
 														  {
 															  $kegiatan = $nama['nama_sub'];
-												   ?>  
-																<i class="fa  fa-check-square-o"> </i> <b><?php echo $kegiatan ?></b><br>
-												  <?php  
+												   ?>
+																	<i class="fa  fa-check-square-o"> </i> <b><?php echo $kegiatan ?></b><br>
+																	<?php  
 														  }
 														}
 												  ?>
-													   
-												</div>
-												<div class="icon">
-												  <i class="ion ion-stats-bars"></i>
-												</div>
-										  </div>
-										</div>	
-										<div class="col-lg-12">
-										   <!-- small box -->
-											  <div class="small-box " style="background-color:#e3aaaa">
-												<div class="inner">
-												  <p><h4>Pekerjaan Slack</h4></p>
-												  <?php
+
+																</div>
+																<div class="icon">
+																	<i class="ion ion-stats-bars"></i>
+																</div>
+															</div>
+														</div>
+														<div class="col-lg-12">
+															<!-- small box -->
+															<div class="small-box " style="background-color:#CCFFCC">
+																<div class="inner">
+																	<p>
+																		<h4>Pekerjaan Slack</h4>
+																	</p>
+																	<?php
 														if(isset($_GET['id_proyek'])) 
 														{ 
 														   $id_proyek = $_GET['id_proyek'];
@@ -979,21 +1026,21 @@ include "fungsi_romawi.php";
 														  while($nama = mysql_fetch_array($cek2))
 														  {
 															  $kegiatan = $nama['nama_sub'];
-												   ?>  
-																<i class="fa  fa-check-square-o"> </i> <b><?php echo $kegiatan ?></b><br>
-												  <?php  
+												   ?>
+																	<i class="fa  fa-check-square-o"> </i> <b><?php echo $kegiatan ?></b><br>
+																	<?php  
 														  }
 														}
 												  ?>
-													   
-												</div>
-												<div class="icon">
-												  <i class="ion ion-stats-bars"></i>
-												</div>
-										  </div>
-										</div>	
-												
-										<!-- <div class="col-lg-12">
+
+																</div>
+																<div class="icon">
+																	<i class="ion ion-stats-bars"></i>
+																</div>
+															</div>
+														</div>
+
+														<!-- <div class="col-lg-12">
 										  <div class="small-box" style="background-color:#FF6666">
 											<div class="inner">
 											 <?php
@@ -1030,8 +1077,8 @@ include "fungsi_romawi.php";
 											</div>
 										 </div>
 										</div>	 -->
-										
-										<!-- <div class="col-lg-12">
+
+														<!-- <div class="col-lg-12">
 										  <div class="small-box" style="background-color:#CCFFCC">
 											<div class="inner">
 											  <?php
@@ -1059,30 +1106,30 @@ include "fungsi_romawi.php";
 											</div>
 										 </div>
 										</div> -->
-									   </div>
-									</div>
-								  </div>
-								  
-								  <div class="col-md-12">
-								  <!-- Info Boxes Style 2 -->
-									 <div class="box box-info">
-									 <!-- /.box-header -->
-										<div class="box-body">
-										<h4><i class="fa fa-sort-amount-asc"></i><span> Jadwal Pekerjaan</span></h4> <br />
-										   <table id="tabel1" class="table table-bordered">
-											 <thead>
-											  <tr>
-												<td width="10%"><b>No</b></td>
-												<td width="25%"><b>Nama Pekerjaan</b></td>
-												<td width="10%"><b>Durasi</b></td> 
-												<td width="10%"><b>Tanggal Mulai</b></td> 
-												<td width="10%"><b>Tanggal Selesai</b></td>
-												<td width="20%"><i><b>Predecessor</b></i></td>
-												<td width="15%"><b>Progres Pekerjaan</b></td>
-											</tr>
-											</thead>
-											<tbody>
-											   <?php
+													</div>
+												</div>
+											</div>
+
+											<div class="col-md-12">
+												<!-- Info Boxes Style 2 -->
+												<div class="box box-info">
+													<!-- /.box-header -->
+													<div class="box-body">
+														<h4><i class="fa fa-sort-amount-asc"></i><span> Jadwal Pekerjaan</span></h4> <br />
+														<table id="tabel1" class="table table-bordered">
+															<thead>
+																<tr>
+																	<td width="10%"><b>No</b></td>
+																	<td width="25%"><b>Nama Pekerjaan</b></td>
+																	<td width="10%"><b>Durasi</b></td>
+																	<td width="10%"><b>Tanggal Mulai</b></td>
+																	<td width="10%"><b>Tanggal Selesai</b></td>
+																	<td width="20%"><i><b>Predecessor</b></i></td>
+																	<td width="15%"><b>Progres Pekerjaan</b></td>
+																</tr>
+															</thead>
+															<tbody>
+																<?php
 												if(isset($_GET['id_proyek'])) 
 												{ 
 													   $id_proyek = $_GET['id_proyek'];
@@ -1091,21 +1138,21 @@ include "fungsi_romawi.php";
 													  $sql = mysql_query("select * from pekerjaan join proyek on pekerjaan.id_jenis = proyek.id_jenis where id_proyek ='$id_proyek' order by kode_pekerjaan");	  
 													  while($r = mysql_fetch_array($sql))
 													  {
-													 ?>	
-													 <tr>	
-														 <td>
-															<dd><b><?php echo Romawi($r['kode_pekerjaan']) ?></b></dd>
-														 </td>
-														 <td>
-															<b><?php echo $r['nama_pekerjaan']; ?></b>
-															 <td>&nbsp;</td>
-															 <td>&nbsp;</td>
-															 <td>&nbsp;</td>
-															 <td>&nbsp;</td>
-															 <td>&nbsp;</td>
-															 <td>&nbsp;</td>	
-														 </td> 
-															<?php
+													 ?>
+																<tr>
+																	<td>
+																		<dd><b><?php echo Romawi($r['kode_pekerjaan']) ?></b></dd>
+																	</td>
+																	<td>
+																		<b><?php echo $r['nama_pekerjaan']; ?></b>
+																	<td>&nbsp;</td>
+																	<td>&nbsp;</td>
+																	<td>&nbsp;</td>
+																	<td>&nbsp;</td>
+																	<td>&nbsp;</td>
+																	<td>&nbsp;</td>
+																	</td>
+																	<?php
 														
 															$sql2 = mysql_query ("SELECT kode_pekerjaan,kode_sub,nama_sub,id_master_sub
 																				  FROM `master_sub_pekerjaan`
@@ -1117,16 +1164,18 @@ include "fungsi_romawi.php";
 																while($s=mysql_fetch_array($sql2))
 																{
 																?>
-																 <tr>
-																	 <td>
-																	   <dd><i><center><?php echo Romawi($s['kode_pekerjaan']).'.'.$s['kode_sub']; ?></center></i></dd>
-																	 </td>
-																	 <td>
-																	   <i><?php echo $s['nama_sub']; ?></i>
-																		
-																	 </td>
-																	 <td>
-																		 <?php
+																<tr>
+																	<td>
+																		<dd><i>
+																				<center><?php echo Romawi($s['kode_pekerjaan']).'.'.$s['kode_sub']; ?></center>
+																			</i></dd>
+																	</td>
+																	<td>
+																		<i><?php echo $s['nama_sub']; ?></i>
+
+																	</td>
+																	<td>
+																		<?php
 																		   
 																		   $id = $s['id_master_sub'];
 																		  
@@ -1137,25 +1186,25 @@ include "fungsi_romawi.php";
 																				   
 																		   $res= mysql_query($sub);
 																		 ?>
-																		 
-																		  <table border="1" > 
+
+																		<table border="1">
 																			<?php
 																			   while($detail=mysql_fetch_array($res))
 																			   {
 																					?>
-																					<tr> 
-																					   <?php 
+																			<tr>
+																				<?php 
 																						  $id = $detail['id_jadwal'];
 																						  $sql4 = mysql_query ("SELECT * from jadwal where id_jadwal = '$id'")or die(mysql_error());
 																						  $s4=mysql_fetch_array($sql4);
 																						?>
-																						 <?php echo $s4['durasi_kegiatan']." Jam"?>
-																						 
-																					</tr>
-																		   <?php  }?>
-																		 </table>     
-																	 </td>
-																	  <td>
+																				<?php echo $s4['durasi_kegiatan']." Jam"?>
+
+																			</tr>
+																			<?php  }?>
+																		</table>
+																	</td>
+																	<td>
 																		<?php
 																		   $id = $s['id_master_sub'];
 																		   $sub2 = "SELECT id_jadwal FROM jadwal
@@ -1164,27 +1213,27 @@ include "fungsi_romawi.php";
 																				   WHERE sub_pekerjaan.id_master_sub = '$id' AND jadwal.id_proyek = '$id_proyek'";
 																		   $res2= mysql_query($sub2);
 																		 ?>
-																		 
-																		  <table border="1" > 
+
+																		<table border="1">
 																			<?php
 																			   while($detail2=mysql_fetch_array($res2))
 																			   {
 																					?>
-																					<tr> 
-																					   <?php 
+																			<tr>
+																				<?php 
 																						  $id = $detail2['id_jadwal'];
 																						  $sql5 = mysql_query ("SELECT * from jadwal where id_jadwal = '$id'")or die(mysql_error());
 																						  $s5=mysql_fetch_array($sql5);
 																						?>
-																						  <?php echo date('d/m/Y',strtotime($s5['tanggal_mulai_j']))?>
-																						 
-																					</tr>
-																		   <?php  }?>
-																		 </table>     
-																	 </td>
-																	 
-																	 <td>
-																	   <?php
+																				<?php echo date('d/m/Y',strtotime($s5['tanggal_mulai_j']))?>
+
+																			</tr>
+																			<?php  }?>
+																		</table>
+																	</td>
+
+																	<td>
+																		<?php
 																		   $id = $s['id_master_sub'];
 																		  
 																		   $sub3 = "SELECT id_jadwal FROM jadwal
@@ -1193,26 +1242,26 @@ include "fungsi_romawi.php";
 																				   WHERE sub_pekerjaan.id_master_sub = '$id' AND jadwal.id_proyek = '$id_proyek'";
 																		   $res3= mysql_query($sub3);
 																		 ?>
-																		 
-																		  <table border="1" > 
+
+																		<table border="1">
 																			<?php
 																			   while($detail3=mysql_fetch_array($res3))
 																			   {
 																					?>
-																					<tr> 
-																					   <?php 
+																			<tr>
+																				<?php 
 																						  $id = $detail3['id_jadwal'];
 																						  $sql6 = mysql_query ("SELECT * from jadwal where id_jadwal = '$id'")or die(mysql_error());
 																						  $s6=mysql_fetch_array($sql6);
 																						?>
-																							<?php echo date('d/m/Y',strtotime($s6['tanggal_selesai_j']))?>
-																						 
-																					</tr>
-																		   <?php  }?>
-																		 </table>     
-																   </td>
-																   <td>
-																	  <?php
+																				<?php echo date('d/m/Y',strtotime($s6['tanggal_selesai_j']))?>
+
+																			</tr>
+																			<?php  }?>
+																		</table>
+																	</td>
+																	<td>
+																		<?php
 																	   if(isset($_GET['id_proyek'])) 
 																	   { 
 																		$id_proyek = $_GET['id_proyek'];
@@ -1224,18 +1273,18 @@ include "fungsi_romawi.php";
 																			while($cek=mysql_fetch_array($res4))
 																			{
 																			  ?>
-																				<?php
+																		<?php
 																				   $id = $cek['id_sub'];
-																				   $subpek = "SELECT * from pendahulu Where id_sub = '$id'";
+																				   $subpek = "SELECT * from pendahulu Where id_sub = '$id' LIMIT 1";
 																				   $resub= mysql_query($subpek);
 																				  ?>
-																				  
-																					<?php
+
+																		<?php
 																					   while($idpek=mysql_fetch_array($resub))
 																					   {
 																							?>
-																							
-																							   <?php 
+
+																		<?php 
 																								  $id = $idpek['id_pek_pendahulu'];
 																								  $sql4 = mysql_query("SELECT * from sub_pekerjaan
 																													   JOIN master_sub_pekerjaan
@@ -1245,18 +1294,18 @@ include "fungsi_romawi.php";
 																													   WHERE sub_pekerjaan.id_sub = '$id'")or die(mysql_error());
 																								  $s4=mysql_fetch_array($sql4);
 																								?>
-																								<i>
-																								
-																								<?php echo $s4['nama_sub']?><br />
-																							   </i>
-																				   <?php  }?>
-																				<?php 
+																		<i>
+
+																			<?php echo $s4['nama_sub']?><br />
+																		</i>
+																		<?php  }?>
+																		<?php 
 																				}
 																			}
 																		?>
-																   </td>
-																   <td> 
-																	 <?php
+																	</td>
+																	<td>
+																		<?php
 																	   if(isset($_GET['id_proyek'])) 
 																	   { 
 																		$id_proyek = $_GET['id_proyek'];
@@ -1268,8 +1317,8 @@ include "fungsi_romawi.php";
 																			while($cek=mysql_fetch_array($res4))
 																			{
 																			  ?>
-																				
-																			  <?php	
+
+																		<?php	
 																				$id = $cek['id_sub'];
 																				$kegiatan = mysql_query("select sum(persen_realisasi) bobot 
 																										 from detail_progres 
@@ -1279,44 +1328,45 @@ include "fungsi_romawi.php";
 																				while($r=mysql_fetch_array($kegiatan))
 																				{
 																				?>
-																				 <div class="progress">
-																					<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" 
-																					aria-valuemax="100" style="width:<?php echo $r['bobot']?>%">
-																						<?php echo number_format($r['bobot']) ?> %
-																					 </div>
-																				</div>
-																				<?php 
+																		<div class="progress">
+																			<div class="progress-bar progress-bar-striped progress-bar-animated"
+																				role="progressbar" aria-valuemin="0" aria-valuemax="100"
+																				style="width:<?php echo $r['bobot']?>%">
+																				<?php echo number_format($r['bobot']) ?> %
+																			</div>
+																		</div>
+																		<?php 
 																				}
 																		   }
 																	   }
 																	?>
-																   </td>  
+																	</td>
 																</tr>
-															  <?php
+																<?php
 															} 
 														}else 
 														{
 														   
 														}
 													  ?>
-														
-													<?php
+
+																<?php
 													}
 												  }
-													?>	
-													</tr>
-												 </tbody>	
-											</table>
-										 </div>
-									   <!-- /.-box -->
+													?>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													<!-- /.-box -->
+												</div>
+											</div>
+										</div>
 									</div>
-								</div>	 
-							 </div>
-						  </div>
-				     </div>
-                 </div><!-- /.post -->
-              </div><!-- /.tab-pane -->
-			</div>
-	  </div>
-  </section>
+								</div>
+							</div><!-- /.post -->
+						</div><!-- /.tab-pane -->
+					</div>
+				</div>
+	</section>
 </div><!-- /.content-wrapper -->
