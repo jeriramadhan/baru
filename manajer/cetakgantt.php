@@ -1,4 +1,4 @@
-<?php include "header.php";
+<?php include "header_cetak.php";
     $link=koneksidb();
     $id_proyek = $_GET['id_proyek']; 
     $isi = mysql_query("SELECT proyek.id_proyek,nama_proyek,tanggal_mulai,tanggal_selesai,jadwal.id_sub,nama_sub,
@@ -42,6 +42,13 @@
     $durasi_proyek = $proyek['durasi_proyek'];
     $jumlahMinggu1 = ceil($durasi_proyek/7);
 ?>
+<script type="text/javascript">
+  function cetak() {
+    var tombol = document.getElementById("tombol");
+    tombol.innerHTML = '';
+    window.print();
+  }
+</script>
  <script type="text/javascript">
   FusionCharts.ready(function(){
     var revenueChart = new FusionCharts({
@@ -145,29 +152,11 @@
     }
   }
 
-
-
 });
 revenueChart.render();
-
-  function print() {
-        revenueChart.print();
-    }
-
-    document.getElementById("print").addEventListener("click", print);
 });
 </script>
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="index.php"><i class="fa fa-home"></i>Beranda</a></li>
-        <li class="active">Gantt Chart</li>
-      </ol>
-    </section>
+<!-- -->
 
 <!-- Main content -->
     <section class="content">
@@ -179,9 +168,10 @@ revenueChart.render();
             <div class="box-header with-border">
               <h3 class="box-title">Gantt Chart</h3>
             </div>
-            <div class="box-header"><a href='index.php?id_proyek=<?php echo $id_proyek; ?>' class='btn btn-info btn-fill btn-wd btn-xs full-right' >Kembali</a><br><br>
-            <button id="print" class="btn btn-info btn-fill btn-wd btn-xs full-right"><i class="fa fa-print"></i>Cetak</button>
-            </div>
+            <div class="pull-right">
+  <!-- <a href="" onclick="javascript:cetak()" id="tombol"><i class="fa fa-print"></i> cetak kuitansi</a> -->
+  <button onClick="javascript:cetak()" id="tombol"><i class="fa fa-print"></i>Cetak Data Tenaga</button>
+</div>
             <!-- /.box-header -->
             <div id="chartContainer"></div>
           </div>

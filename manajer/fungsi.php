@@ -376,6 +376,55 @@ if (isset($_GET['proses_tambah_pekerjaan_proyek'])) {
 ?>
 <!--Akhir proses tambah pekerjaan proyek-->
 
+<!--Proses Tambah pekerjaan proyek-->
+<?php
+if (isset($_GET['proses_edit_pekerjaan_proyek'])) {
+	$link = koneksidb();
+	$id_proyek = $_POST['id_proyek'];
+	$id_sub = $_POST['id_sub'];
+
+	$biaya = str_replace(',', '.', str_replace('.', '', $_POST['harga_satuan']));
+	$volume = str_replace(',', '.', str_replace('.', '', $_POST['volume']));
+
+	$sql3 = mysql_query("select biaya from proyek where id_proyek='$id_proyek'");
+	$row = mysql_fetch_array($sql3);
+	$biaya_total = $row['biaya'];
+
+
+
+
+	$jumlah = $biaya * $volume;
+	$bobot = ($jumlah / $biaya_total) * 100;
+
+	$querynilai = mysql_query("SELECT nilai_proyek FROM proyek where id_proyek = '$id_proyek'");
+	$ceknilai = mysql_fetch_array($querynilai);
+	$np = $ceknilai['nilai_proyek'];
+
+	if ($biaya > $np) {
+?>
+		<script language="javascript">
+			document.location = 'pekerjaan_proyek.php?id_proyek=<?= $_POST['id_proyek'] ?>&pesan=gagal';
+		</script>
+<?php
+	} else {
+
+		$input = "UPDATE sub_pekerjaan set id_sub='$id_sub',id_proyek='$id_proyek',harga_satuan='$biaya',volume='$volume' WHERE id_sub='$id_sub' and id_proyek='$id_proyek'";
+		$query_input = mysql_query($input);
+
+		if ($query_input) {
+			$page = "pekerjaan_proyek.php?id_proyek=$id_proyek&pesan=sukses";
+			echo redirectPage($page);
+		} else {
+			$page = "pekerjaan_proyek.php?id_proyek=$id_proyek&pesan=gagal";
+			echo redirectPage($page);
+		}
+		mysql_close($open);
+	}
+}
+?>
+<!--Akhir proses tambah pekerjaan proyek-->
+
+
 <!--proses hapus pekerjaan proyek-->
 <?php
 if (isset($_GET['proses_hapus'])) {

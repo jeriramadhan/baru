@@ -1,6 +1,6 @@
 
 <?php
-include "header.php";
+include "headercpm.php";
 include "fungsi_romawi.php";
 $link=koneksidb();
 $id_proyek = $_GET['id_proyek'];
@@ -151,20 +151,12 @@ $getpendahulu = mysql_query("SELECT * FROM pendahulu JOIN jadwal ON pendahulu.`i
   }
 </script>
 
-<div class="content-wrapper">
+<!-- <div class="content-wrapper"> -->
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="index.php?id_proyek=<?php echo $id_proyek; ?>"><i class="fa fa-home"></i>Beranda</a></li>
-        <li class="active">Jaringan CPM</li>
-      </ol>
-    </section>
+    
 
 <!-- Main content -->
-    <section class="content">
+    <!-- <section class="content"> -->
       <div class="row">
         <!-- left column -->
         <div class="col-md-12">
@@ -172,11 +164,19 @@ $getpendahulu = mysql_query("SELECT * FROM pendahulu JOIN jadwal ON pendahulu.`i
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">Jaringan CPM</h3>
+              <script type="text/javascript">
+  function cetak() {
+    var tombol = document.getElementById("tombol");
+    tombol.innerHTML = '';
+    window.print();
+  }
+</script>
+<div class="pull-right">
+  <!-- <a href="" onclick="javascript:cetak()" id="tombol"><i class="fa fa-print"></i> cetak kuitansi</a> -->
+  <button onClick="javascript:cetak()" id="tombol"><i class="fa fa-print"></i>Cetak Jaringan</button>
+</div>
             </div>
-            <div class="box-header"><a href='index.php?id_proyek=<?php echo $id_proyek; ?>' class='btn btn-info btn-fill btn-wd btn-xs full-right' >Kembali</a> <br>
-            <a href="cetakchartcpm.php?id_proyek=<?=$_GET['id_proyek'] ?>" class="'btn btn-info btn-fill btn-wd btn-xs full-right">Cetak<i class="fa fa-print"></i></a>
-            <br>
-            </div>
+            
             <!-- /.box-header -->
             <div id="myDiagramDiv" style="background-color: whitesmoke; border: solid 1px black; width: 100%; height: 600px"></div>
           </div>
@@ -184,7 +184,7 @@ $getpendahulu = mysql_query("SELECT * FROM pendahulu JOIN jadwal ON pendahulu.`i
         </div>
       </div>
       <!-- /.row -->
-    </section>
+    <!-- </section> -->
     <!-- /.content -->
   </div>
 <?php include "footer.php"; ?>

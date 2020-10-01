@@ -37,7 +37,10 @@ include "header.php";
             <div class="box-body">
             <div class="pull-right">
               <a href="index.php?id_proyek=<?php echo $_GET['id_proyek'];?>" class="btn btn-primary btn-fill btn-sm" style="margin-bottom: 10px; margin-top: -30px;">Kembali</a>
+              <br>
+              <a href="cetakcpm.php?id_proyek=<?=$_GET['id_proyek'] ?>" class="btn btn-info btn-fill btn-sm">Cetak<i class="fa fa-print"></i></a><br>
 </div>
+<br>
               <table id="tabel1" class="table table-bordered table-striped">
                 <thead>
      

@@ -343,7 +343,7 @@ $link=koneksidb();
 													  <?php
 														}
 													  ?> 
-													  
+													  <a href='edit_pekerjaanproyek.php?id_proyek=<?=$_GET['id_proyek']?>&id_sub=<?=$row['id_sub']?>'class='btn btn-info btn-fill btn-sm' >Edit</a>
 													  <?php
 														if ($s['kode_pekerjaan'] > 1 && $row['id_sub'] > 1)
 														{

@@ -51,8 +51,12 @@ $getpekerjaan = mysql_query("SELECT id_sub,kode_pekerjaan,sub_pekerjaan.kode_sub
 							    ON (sub_pekerjaan.id_master_sub=master_sub_pekerjaan.id_master_sub)
 								WHERE sub_pekerjaan.id_proyek ='$id'");
               ?>
-              
+              <div class="box-header with-border">
+											<h2 class="box-title"><?= $r['nama_sub']?></h2><br>
+                      <!-- <h2 class="box-title">Ubah </h3> -->
+										</div>
           <!-- form start -->
+          
           <form role="form" action="fungsi.php?proses2=ubah_jadwal" method="POST" class="form-horizontal">
             <div class="box-body">
 													<input type="hidden" class="form-control" name="id_proyek" value="<?= $_GET['id_proyek'] ?>">
@@ -61,7 +65,7 @@ $getpekerjaan = mysql_query("SELECT id_sub,kode_pekerjaan,sub_pekerjaan.kode_sub
 													<div class="form-group">
 														<label class="col-sm-3 control-label">Nama Pekerjaan : </label>
 														<div class="col-sm-4">
-															<select class="form-control select2" style="width: 100%;" name="id_sub">
+															<select class="form-control select2" style="width: 100%;" value="<?php echo $r['nama_sub']?> name="id_sub">
 																<?php while ($row = mysql_fetch_array($getpekerjaan)) { ?>
 																<option value="<?php echo $row['id_sub']; ?>">
 																	<?php echo Romawi($row['kode_pekerjaan']) . '.' . $row['kode_sub'] . ' - ' . $row['nama_sub'];  ?>

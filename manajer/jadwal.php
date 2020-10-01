@@ -259,9 +259,10 @@ $jam = $p['jam'];
 												<botton class="btn btn-danger btn-fill btn-wd btn-sm"
 													style="margin-bottom: 10px; margin-top: -30px;" data-toggle="modal" data-target="#myModal"
 													data-whatever="fungsi.php?proses_reset_jadwal=reset_jadwal&id_proyek=<?= $_GET['id_proyek'] ?>">
-													Reset Jadwal</botton>
+													Reset Jadwal</botton><br>
+												<a href="cetakjadwal.php?id_proyek=<?=$_GET['id_proyek'] ?>" class="btn btn-info btn-fill btn-sm">Cetak<i class="fa fa-print"></i></a>
 											</div>
-											<table id="tabel1" class="table table-bordered table-striped">
+											<table id="tabel" class="table table-bordered table-striped">
 												<thead>
 
 													<tr>
